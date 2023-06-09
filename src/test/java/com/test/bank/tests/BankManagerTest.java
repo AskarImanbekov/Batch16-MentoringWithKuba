@@ -12,11 +12,10 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class BankManagerTest {
+public class BankManagerTest extends BankTestBase{
 
     @Test
     public void validateAddCustomerFunctionality() throws InterruptedException {
-
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -24,6 +23,7 @@ public class BankManagerTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
+
 
         BankLoginPage bankLoginPage = new BankLoginPage(driver);
         bankLoginPage.clickManagerButton();
@@ -35,7 +35,6 @@ public class BankManagerTest {
     }
     @Test
     public void validatingOpenAccountFunctionality() throws InterruptedException {
-
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -43,6 +42,7 @@ public class BankManagerTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
+
 
         BankLoginPage bankLoginPage = new BankLoginPage(driver);
         bankLoginPage.clickManagerButton();
@@ -61,6 +61,7 @@ public class BankManagerTest {
     @Test
     public void validateCustomerFunctionality() throws InterruptedException {
 
+
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -69,7 +70,9 @@ public class BankManagerTest {
         driver.manage().window().maximize();
         driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
 
+
         BankLoginPage bankLoginPage = new BankLoginPage(driver);
+        Thread.sleep(2000);
         bankLoginPage.clickManagerButton();
 
         BankManagerPage bankManagerPage = new BankManagerPage(driver);

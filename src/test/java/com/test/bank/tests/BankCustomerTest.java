@@ -11,20 +11,16 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class BankCustomerTest {
+public class BankCustomerTest extends BankTestBase {
 
     @Test
     public void customerPageTest() throws InterruptedException {
 
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
 
         BankLoginPage bankLoginPage = new BankLoginPage(driver);
+
+        Thread.sleep(2000);
+
         bankLoginPage.clickManagerButton();
 
         BankManagerPage bankManagerPage = new BankManagerPage(driver);
@@ -39,11 +35,12 @@ public class BankCustomerTest {
 
         BankCustomerPage bankCustomerPage = new BankCustomerPage(driver);
         bankLoginPage.clickHomeButton();
-        Thread.sleep(500);
+        Thread.sleep(3000);
         bankLoginPage.clickCustomerLoginButton();
-        Thread.sleep(500);
+        Thread.sleep(3000);
 
         bankLoginPage.clickHomeButton();
+
         bankLoginPage.clickCustomerLoginButton();
 
         bankCustomerPage.selectYourNameAndValidate("Askar Imanbekov");
@@ -54,11 +51,8 @@ public class BankCustomerTest {
 
         bankCustomerPage.withdrawAmountAndMessage("300","Transaction successful");
 
-        bankCustomerPage.checkBalance();
+        bankCustomerPage.transactionFunctionality();
 
-        bankCustomerPage.depositAndWithDrawMath();
-
-        driver.quit();
 
     }
 

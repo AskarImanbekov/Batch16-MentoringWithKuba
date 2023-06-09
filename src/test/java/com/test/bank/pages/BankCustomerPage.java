@@ -45,8 +45,8 @@ public class BankCustomerPage {
     @FindBy(xpath = "//button[.='Withdraw']")
     WebElement withdrawButton;
 
-    @FindBy(xpath = "//strong[@class='ng-binding']")
-    List<WebElement> allInfo;
+    @FindBy(xpath = "//div[@ng-hide='noAccount']//strong[2]")
+    WebElement balance;
 
     @FindBy(xpath = "//button[contains(text(),'Trans')]")
     WebElement transactionButton;
@@ -77,33 +77,21 @@ public class BankCustomerPage {
     }
 
     public void withdrawAmountAndMessage(String amount, String expectedMessage) throws InterruptedException {
+
         firstWithdrawButton.click();
-        Thread.sleep(500);
+        Thread.sleep(3000);
         withdrawAmount.sendKeys(amount);
-        Thread.sleep(500);
+        Thread.sleep(3000);
         withdrawButton.click();
-        Thread.sleep(500);
+        Thread.sleep(3000);
         Assert.assertEquals(BrowserUtils.getText(withdrawSuccessfulMessage),expectedMessage);
     }
 
-
-    public void checkBalance() throws InterruptedException {
-
-
-        for (int i = 1 ; i< allInfo.size()-1;i++){
-
-            Integer balance = Integer.parseInt(BrowserUtils.getText(allInfo.get(i)));
-            Thread.sleep(500);
-            System.out.println("Balance : "+"$"+balance);
-
-        }
-
-    }
-    public void depositAndWithDrawMath() throws InterruptedException {
+    public void transactionFunctionality() throws InterruptedException {
 
         transactionButton.click();
 
-        Thread.sleep(500);
+        Thread.sleep(2000);
 
         Integer depositAmount = 0;
 
@@ -116,6 +104,8 @@ public class BankCustomerPage {
         }
         Integer withdrawAmount = 0;
 
+        Thread.sleep(2000);
+
         for (int j = 1 ; j<withdrawFullAmount.size()-1;j++){
 
             Integer withdraw = Integer.parseInt(BrowserUtils.getText(withdrawFullAmount.get(j)));
@@ -124,8 +114,11 @@ public class BankCustomerPage {
 
         }
         int result = depositAmount - withdrawAmount;
-        System.out.println("Deposit : " + "$"+depositAmount);
-        System.out.println("Withdraw : " + "$"+withdrawAmount);
-        System.out.println("Total : " + "$"+depositAmount +" - "+ "$"+withdrawAmount+ " = " +"$"+ result);
+
+
+
+        Assert.assertEquals(result,balance);
+
+
     }
 }

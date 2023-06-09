@@ -36,9 +36,11 @@ public class BankLoginPage {
         managerLogin.click();
     }
     public void clickHomeButton(){
+
         homeButton.click();
     }
     public void clickCustomerLoginButton(){
+
         customerLoginButton.click();
     }
 
