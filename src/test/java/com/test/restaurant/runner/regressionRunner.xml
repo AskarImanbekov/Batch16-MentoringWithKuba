@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Regression Suite">
+    <test name="Restaurant Test">
+        <classes>
+            <class name="com.test.restaurant.test.MainTests"></class>
+            <class name="com.test.restaurant.test.FishAndSeafoodTest"></class>
+            <class name="com.test.restaurant.test.FishForDinnerTest"></class>
+        </classes>
+    </test>
+
+</suite>

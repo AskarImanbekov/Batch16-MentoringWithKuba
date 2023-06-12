@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke Testing">
+
+    <test name="Bank Login">
+
+        <classes>
+
+            <class name="com.test.bank.tests.BankLoginTest"></class>
+
+        </classes>
+
+    </test>
+
+    <test name="Blaze Order">
+
+        <classes>
+
+            <class name="com.test.blaze.tests.CartPageTest"></class>
+
+        </classes>
+
+    </test>
+
+</suite>

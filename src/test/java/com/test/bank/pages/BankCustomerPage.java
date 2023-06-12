@@ -1,6 +1,7 @@
 package com.test.bank.pages;
 
 import Utils.BrowserUtils;
+import com.test.bank.tests.BankTestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +10,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class BankCustomerPage {
+public class BankCustomerPage extends BankTestBase {
 
     public BankCustomerPage(WebDriver driver){
         PageFactory.initElements(driver,this);
@@ -51,11 +52,11 @@ public class BankCustomerPage {
     @FindBy(xpath = "//button[contains(text(),'Trans')]")
     WebElement transactionButton;
 
-    @FindBy(xpath = "//tr[@id='anchor0']//td[@class='ng-binding']")
-    List<WebElement> depositFullAmount;
+    @FindBy(xpath = "//tr[@id='anchor0']//td[2]")
+    WebElement depositCredit;
 
-    @FindBy(xpath = "//tr[@id='anchor1']//td[@class='ng-binding']")
-    List<WebElement> withdrawFullAmount;
+    @FindBy(xpath = "//tr[@id='anchor1']//td[2]")
+    WebElement withdrawDebit;
 
     @FindBy(xpath = "//span[.='Transaction successful']")
     WebElement withdrawSuccessfulMessage;
@@ -89,35 +90,19 @@ public class BankCustomerPage {
 
     public void transactionFunctionality() throws InterruptedException {
 
+        int actualBalance = Integer.parseInt(BrowserUtils.getText(balance));
         transactionButton.click();
 
         Thread.sleep(2000);
 
-        Integer depositAmount = 0;
+        int expectedBalance = (Integer.parseInt(BrowserUtils.getText(depositCredit))-
+                (Integer.parseInt(BrowserUtils.getText(withdrawDebit))));
 
-        for (int i = 1 ; i < depositFullAmount.size()-1;i++){
-
-            Integer deposit = Integer.parseInt(BrowserUtils.getText(depositFullAmount.get(i)));
-
-            depositAmount+=deposit;
-
-        }
-        Integer withdrawAmount = 0;
-
-        Thread.sleep(2000);
-
-        for (int j = 1 ; j<withdrawFullAmount.size()-1;j++){
-
-            Integer withdraw = Integer.parseInt(BrowserUtils.getText(withdrawFullAmount.get(j)));
-
-            withdrawAmount+=withdraw;
-
-        }
-        int result = depositAmount - withdrawAmount;
+        Assert.assertEquals(actualBalance,expectedBalance);
 
 
 
-        Assert.assertEquals(result,balance);
+
 
 
     }

@@ -8,8 +8,11 @@ import org.openqa.selenium.support.PageFactory;
 public class MainPage {
 
     public MainPage(WebDriver driver){
+
         PageFactory.initElements(driver,this);
     }
+
+
     @FindBy(xpath = "//button[@data-bs-dismiss='modal']")
     WebElement closeButton;
 
@@ -24,9 +27,9 @@ public class MainPage {
     public void customersPage() throws InterruptedException {
 
         closeButton.click();
-        Thread.sleep(1000);
-       customersOption.click();
-        Thread.sleep(1000);
+        Thread.sleep(500);
+        customersOption.click();
+        Thread.sleep(500);
         customersButton.click();
         Thread.sleep(500);
 

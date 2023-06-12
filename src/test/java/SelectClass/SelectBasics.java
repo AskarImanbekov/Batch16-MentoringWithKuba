@@ -44,6 +44,7 @@ public class SelectBasics {
         choice.selectByValue("1");// SECOND MOST USED METHOD FOR SELECT
         Thread.sleep(2000);
         choice.selectByIndex(2);
+
         List<WebElement> actualOptions = choice.getOptions();//
 
         List<String> expectedOptions = Arrays.asList("Please select an option","Option 1","Option 2");
